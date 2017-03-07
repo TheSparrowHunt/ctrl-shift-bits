@@ -25,5 +25,6 @@ public:
     void draw();
     void behaviour();
     
+    
 };
 #endif /* ShiftLeft_hpp */

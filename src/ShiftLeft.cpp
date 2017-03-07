@@ -20,31 +20,47 @@ ShiftLeft::~ShiftLeft(){
 }
 
 void ShiftLeft::draw(){
-    ofPushStyle();
-        ofNoFill();
-        ofDrawRectRounded(position.x - size/2, position.y - size/2, size, size, 10);
-    ofPopStyle();
     
-    ofPushStyle();
-    //get the bounding box of the textbox
-    ofRectangle textBound = font->getStringBoundingBox(displayText, position.x, position.y);
-    ofPoint topLeft = textBound.getTopLeft();
-    ofPoint halfSizeText = {position.x - topLeft.x, position.y - topLeft.y, 0.0f};
-        font->drawStringAsShapes(displayText, position.x + halfSizeText.x, position.y);
-    ofPopStyle();
+    //push matrix to keep translattion/scale/etc local
+    ofPushMatrix();
+    
+        //translate to position so we can draw based on local coords
+        ofTranslate(position.x, position.y);
+    
+        //drawing the rectangle around the centre of object
+        ofPushStyle();
+    
+            ofNoFill();
+            ofDrawRectRounded(-size/2, -size/2, size, size, 10);
+    
+        ofPopStyle();
+    
+        //drawing the text into the box
+        ofPushStyle();
+            //get the bounding box of the textbox
+            //DEBUG:
+            //ofRectangle textBound = font->getStringBoundingBox(displayText, 0.5*-font->stringWidth(displayText) - font->getSize()/6, font->stringHeight(displayText)/2);
+    
+            font->drawStringAsShapes(displayText, -font->stringWidth(displayText)/2 - font->getSize()/6, font->stringHeight(displayText)/2);
+        ofPopStyle();
+    ofPopMatrix();
 }
 
 void ShiftLeft::behaviour(){
+    
     //nothing in the first input
     if (firstIn == NULL){
         outValue = 0U;
     }
+    
     //nothing in first and second inputs pass-through
     else if (secondIn == NULL){
         outValue = firstIn->outValue;
     }
+    
     //something in both first and second inputs
     else{
+        
         //outValue is first value shifted by the second value
         outValue = firstIn->outValue << secondIn->outValue;
     }
