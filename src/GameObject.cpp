@@ -10,6 +10,7 @@
 
 GameObject::GameObject(float x, float y, unsigned long ID){
     position = {x, y};
+    //not exclusively unique
     uniqueID = ID;
 }
 

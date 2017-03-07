@@ -30,6 +30,7 @@ public:
     std::shared_ptr<ofTrueTypeFont> font;
     std::string displayText;
     
+    //number of nodes, might be useful for the future
     unsigned int inNodes;
     unsigned int outNodes;
     
@@ -41,14 +42,10 @@ public:
     //blocks displaying the nodes for connection
     BlockNodeIn* firstInNode;
     BlockNodeIn* secondInNode;
-    
     BlockNodeOut* outNode;
     
-    //outvalue for the next Block
+    //outvalue for the next Block, this is taken by the next block to perform its functions
     unsigned int outValue;
-    
-    //clearing extra values
-    unsigned int clearValues(unsigned int value);
     
     //bits for this level
     unsigned int bits;
@@ -57,16 +54,17 @@ public:
     bool mouseIn=false;
     
     void draw();
+    
     //to resize the bounding boxes after scaling the screen
     void resizeBounds(float resize);
     void intersectionCheck(float x, float y);
     bool intersectionCheckOut(float x, float y);
+    //clearing extra values
+    unsigned int clearValues(unsigned int value);
     
     protected:
-    //virtual function for draw, children of this object will have this.
+    //virtual function for behaviour, children of this object will have this.
     //ready to inherit on the next level
-    
-    
     virtual void behaviour()=0;
 };
 
