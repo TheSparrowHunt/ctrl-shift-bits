@@ -21,6 +21,8 @@ class GameObject{
     
     //virtual destructor for chilren
     virtual ~GameObject();
+    
+    ofRectangle boundingBox;
     protected:
     //variable to test for when an object has completed what it needs to do and can be removed
     bool finished = false;

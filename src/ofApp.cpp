@@ -5,7 +5,8 @@ void ofApp::setup(){
     uniqueIDCounter = 0UL;
     font = std::shared_ptr<ofTrueTypeFont>(new ofTrueTypeFont());
     font->load("SCProLight.ttf", 72, true, true, true);
-    test = new ShiftLeft(ofGetWidth()/2, ofGetHeight()/2, 100, font, 120, 4);
+    test = new ShiftLeft(0, 0, 100, font, 120, 4);
+    scaleFactor = 1.0f;
 }
 
 //--------------------------------------------------------------
@@ -15,9 +16,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofBackground(0);
     ofEnableSmoothing();
     test->draw();
+    
 }
 
 //--------------------------------------------------------------
@@ -58,6 +61,10 @@ void ofApp::mouseEntered(int x, int y){
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
 
+}
+
+void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY){
+    std::cout << scrollY << std::endl;
 }
 
 //--------------------------------------------------------------

@@ -13,6 +13,7 @@ Block::Block(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont>
     font = _font;
     size = _size;
     bits = _bits;
+    boundingBox = *new ofRectangle(x-size/2, y-size/2, size, size);
 }
 
 Block::~Block(){
@@ -26,6 +27,8 @@ void Block::draw(){
         //translate to position so we can draw based on local coords
         ofTranslate(position.x, position.y);
         ofScale(0.5, 0.5);
+        //update the bounding box
+        boundingBox.scaleFromCenter(0.5);
         //drawing the rectangle around the centre of object
         ofPushStyle();
     

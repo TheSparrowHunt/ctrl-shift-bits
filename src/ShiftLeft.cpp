@@ -29,13 +29,13 @@ void ShiftLeft::behaviour(){
     
     //nothing in first and second inputs pass-through
     else if (secondIn == NULL){
-        outValue = firstIn->outValue;
+        outValue = clearValues(firstIn->outValue);
     }
     
     //something in both first and second inputs
     else{
         
         //outValue is first value shifted by the second value
-        outValue = firstIn->outValue << secondIn->outValue;
+        outValue = clearValues(firstIn->outValue << secondIn->outValue);
     }
 }

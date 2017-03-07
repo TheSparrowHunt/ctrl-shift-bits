@@ -20,8 +20,9 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-    
+        void mouseScrolled(int x, int y, float scrollX, float scrollY);
     unsigned long uniqueIDCounter;
     ShiftLeft* test;
-    std::shared_ptr<ofTrueTypeFont> font; 
+    std::shared_ptr<ofTrueTypeFont> font;
+    float scaleFactor;
 };
