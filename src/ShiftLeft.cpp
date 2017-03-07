@@ -12,6 +12,7 @@ ShiftLeft::ShiftLeft(float x, float y, unsigned long ID, std::shared_ptr<ofTrueT
     //two ins, one out
     inNodes = 2;
     outNodes = 1;
+    displayText = "<<";
 }
 
 ShiftLeft::~ShiftLeft(){
@@ -19,7 +20,18 @@ ShiftLeft::~ShiftLeft(){
 }
 
 void ShiftLeft::draw(){
-    ofDrawRectRounded(position.x, position.y, size, size, 10);
+    ofPushStyle();
+        ofNoFill();
+        ofDrawRectRounded(position.x - size/2, position.y - size/2, size, size, 10);
+    ofPopStyle();
+    
+    ofPushStyle();
+    //get the bounding box of the textbox
+    ofRectangle textBound = font->getStringBoundingBox(displayText, position.x, position.y);
+    ofPoint topLeft = textBound.getTopLeft();
+    ofPoint halfSizeText = {position.x - topLeft.x, position.y - topLeft.y, 0.0f};
+        font->drawStringAsShapes(displayText, position.x + halfSizeText.x, position.y);
+    ofPopStyle();
 }
 
 void ShiftLeft::behaviour(){

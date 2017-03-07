@@ -4,7 +4,7 @@
 void ofApp::setup(){
     uniqueIDCounter = 0UL;
     font = std::shared_ptr<ofTrueTypeFont>(new ofTrueTypeFont());
-    font->load("SCProLight.ttf", 48);
+    font->load("SCProLight.ttf", 48, true, true, true);
     test = new ShiftLeft(ofGetWidth()/2, ofGetHeight()/2, 100, font, 100, 4);
 }
 
@@ -16,6 +16,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofBackground(0);
+    ofEnableSmoothing();
     test->draw();
 }
 
