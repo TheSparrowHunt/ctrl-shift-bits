@@ -23,6 +23,7 @@ void ofApp::setup(){
     blocks[0]->outNode->connections.push_back(blocks[1]->firstInNode);
     blocks[0]->outNode->connections.push_back(blocks[2]->firstInNode);
     blocks[0]->outNode->connections.push_back(blocks[3]->firstInNode);
+    ofSetBackgroundAuto(false);
 }
 
 //--------------------------------------------------------------
@@ -32,12 +33,16 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofPushStyle();
+    ofSetColor(0, 0, 0, 16);
+    ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
+    ofPopStyle();
     //drawing for the Blocks layer, it scales completely
     //could abstract to a GameState object
     ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofScale(scaleFactor, scaleFactor);
-    ofBackground(0);
+    //ofBackground(0, 0, 0, 10);
     //iteration to do things with the blocks
     for(auto it = blocks.begin(); it != blocks.end(); ++it) {
         (*it)->draw();
@@ -53,7 +58,7 @@ void ofApp::draw(){
     //test->draw();
     ofPopMatrix();
     //DEBUG
-    std::cout << ((float)ofGetMouseX()-ofGetWidth()/2)*-scaleFactor << std::endl;
+    std::cout << ofGetFrameRate() << std::endl;
 }
 
 //--------------------------------------------------------------
