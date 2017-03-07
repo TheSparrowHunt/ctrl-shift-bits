@@ -21,7 +21,7 @@ public:
     //constructor
     Block(float x, float y, unsigned long uniqueID, std::shared_ptr<ofTrueTypeFont> _font, float _size, unsigned int _bits);
     
-    //virtual destructor for chilren
+    //virtual destructor for children
     virtual ~Block();
     
     //adds size and some test to Display and number of in and out nodes
@@ -46,7 +46,14 @@ public:
     //bits for this level
     unsigned int bits;
     
+    //mouse
+    bool mouseIn=false;
+    
     void draw();
+    //to resize the bounding boxes after scaling the screen
+    void resizeBounds(float resize);
+    void intersectionCheck(float x, float y);
+    
     protected:
     //virtual function for draw, children of this object will have this.
     //ready to inherit on the next level

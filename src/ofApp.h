@@ -25,4 +25,5 @@ class ofApp : public ofBaseApp{
     ShiftLeft* test;
     std::shared_ptr<ofTrueTypeFont> font;
     float scaleFactor;
+    std::vector<Block*> blocks;
 };

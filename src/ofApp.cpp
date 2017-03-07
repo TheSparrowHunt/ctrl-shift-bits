@@ -7,6 +7,9 @@ void ofApp::setup(){
     font->load("SCProLight.ttf", 72, true, true, true);
     test = new ShiftLeft(0, 0, 100, font, 120, 4);
     scaleFactor = 1.0f;
+    ofEnableSmoothing();
+    blocks.push_back(new ShiftLeft(0, 0, 100, font, 120, 4));
+    blocks.push_back(new ShiftLeft(100, 100, 101, font, 120, 4));
 }
 
 //--------------------------------------------------------------
@@ -16,11 +19,19 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofPushMatrix();
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
+    ofScale(scaleFactor, scaleFactor);
     ofBackground(0);
-    ofEnableSmoothing();
-    test->draw();
     
+    for(auto it = blocks.begin(); it != blocks.end(); ++it) {
+        (*it)->draw();
+        (*it)->resizeBounds(scaleFactor);
+        (*it)->intersectionCheck(((float)ofGetMouseX())-(ofGetWidth()/2), ((float)ofGetMouseY())-(ofGetHeight()/2));
+    }
+    
+    //test->draw();
+    ofPopMatrix();
 }
 
 //--------------------------------------------------------------
@@ -64,7 +75,10 @@ void ofApp::mouseExited(int x, int y){
 }
 
 void ofApp::mouseScrolled(int x, int y, float scrollX, float scrollY){
-    std::cout << scrollY << std::endl;
+    scaleFactor += scaleFactor*(scrollY/100);
+    if (scaleFactor < 0.0001){
+        scaleFactor = 0.0001;
+    }
 }
 
 //--------------------------------------------------------------

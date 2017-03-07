@@ -13,7 +13,8 @@ Block::Block(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont>
     font = _font;
     size = _size;
     bits = _bits;
-    boundingBox = *new ofRectangle(x-size/2, y-size/2, size, size);
+    boundingBox = ofRectangle(x-size/2, y-size/2, size, size);
+    boundingBox.scaleFromCenter(1);
 }
 
 Block::~Block(){
@@ -28,11 +29,16 @@ void Block::draw(){
         ofTranslate(position.x, position.y);
         ofScale(0.5, 0.5);
         //update the bounding box
-        boundingBox.scaleFromCenter(0.5);
+    
         //drawing the rectangle around the centre of object
         ofPushStyle();
-    
-            ofNoFill();
+            if (mouseIn){
+                ofFill();
+            }
+            else{
+                ofNoFill();
+            }
+            //ofDrawRectangle(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
             ofDrawRectRounded(-size/2, -size/2, size, size, 10);
     
         ofPopStyle();
@@ -42,13 +48,32 @@ void Block::draw(){
             //get the bounding box of the textbox
             //DEBUG:
             //ofRectangle textBound = font->getStringBoundingBox(displayText, 0.5*-font->stringWidth(displayText) - font->getSize()/6, font->stringHeight(displayText)/2);
-    
+            if (mouseIn){
+                ofSetColor(0, 0, 0, 255);
+            }
+            else{
+                ofSetColor(255,255,255, 255);
+            }
+            
             font->drawStringAsShapes(displayText, -font->stringWidth(displayText)/2 - font->getSize()/6, font->stringHeight(displayText)/2);
+    
         ofPopStyle();
     ofPopMatrix();
 }
 
+void Block::resizeBounds(float resize){
+    boundingBox = ofRectangle((position.x-size/4)*resize, (position.y-size/4)*resize, (size/2)*resize, (size/2)*resize);
+    //boundingBox.scaleFromCenter(resize);
+    std::cout << resize << " " << boundingBox.getArea() << std::endl;
+}
+
+void Block::intersectionCheck(float x, float y){
+    ofPoint mouse = ofPoint(x, y);
+    mouseIn = boundingBox.intersects(mouse,mouse);
+
+}
 //should get rid of the extra 1s to the left of the amount of bits for the level in which these blocks exist
 unsigned int Block::clearValues(unsigned int value){
     return value%((unsigned int)std::powf(2.0f, (float)bits));
 }
+

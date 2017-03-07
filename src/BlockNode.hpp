@@ -23,6 +23,8 @@ public:
     
     void draw();
     
+    void resizeBounds();
+    
 };
 
 #endif /* BlockNode_hpp */
