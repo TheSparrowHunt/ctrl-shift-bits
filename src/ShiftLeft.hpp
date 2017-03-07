@@ -16,10 +16,10 @@
 class ShiftLeft : public Block{
 public:
     //constructor
-    ShiftLeft(float x, float y, unsigned long uniqueID, std::shared_ptr<ofTrueTypeFont> _font, float _size);
+    ShiftLeft(float x, float y, unsigned long uniqueID, std::shared_ptr<ofTrueTypeFont> _font, float _size, unsigned int _bits);
     
     //destructor
-    ShiftLeft();
+    ~ShiftLeft();
     
     //non-virtual
     void draw();

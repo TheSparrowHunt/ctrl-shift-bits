@@ -48,9 +48,9 @@ public:
     protected:
     //virtual function for draw, children of this object will have this.
     //ready to inherit on the next level
-    virtual void draw();
+    virtual void draw()=0;
     
-    virtual void behaviour();
+    virtual void behaviour()=0;
 };
 
 #endif /* Block_hpp */

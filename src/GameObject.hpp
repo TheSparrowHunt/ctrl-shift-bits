@@ -29,7 +29,7 @@ class GameObject{
     ofVec2f position;
     
     //virtual function for draw, children of this object will have this.
-    virtual void draw();
+    virtual void draw()=0;
 };
 
 #endif /* GameObject_hpp */

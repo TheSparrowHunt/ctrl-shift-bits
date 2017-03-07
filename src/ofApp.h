@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-
+#include "ShiftLeft.hpp"
 class ofApp : public ofBaseApp{
 
 	public:
@@ -22,5 +22,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     unsigned long uniqueIDCounter;
-		
+    ShiftLeft* test;
+    std::shared_ptr<ofTrueTypeFont> font; 
 };

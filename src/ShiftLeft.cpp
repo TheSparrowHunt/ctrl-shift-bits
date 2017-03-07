@@ -8,14 +8,18 @@
 
 #include "ShiftLeft.hpp"
 
-ShiftLeft::ShiftLeft(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont> _font, float _size) : Block(x, y,uniqueID, _font, _size){
+ShiftLeft::ShiftLeft(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont> _font, float _size, unsigned int _bits) : Block(x, y,uniqueID, _font, _size, _bits){
     //two ins, one out
     inNodes = 2;
     outNodes = 1;
 }
 
-void ShiftLeft::draw(){
+ShiftLeft::~ShiftLeft(){
     
+}
+
+void ShiftLeft::draw(){
+    ofDrawRectRounded(position.x, position.y, size, size, 10);
 }
 
 void ShiftLeft::behaviour(){
@@ -23,11 +27,11 @@ void ShiftLeft::behaviour(){
     if (firstIn == NULL){
         outValue = 0U;
     }
-    //nothing in first and second inputs
+    //nothing in first and second inputs pass-through
     else if (secondIn == NULL){
         outValue = firstIn->outValue;
     }
-    //something in both first and seconf inputs
+    //something in both first and second inputs
     else{
         //outValue is first value shifted by the second value
         outValue = firstIn->outValue << secondIn->outValue;

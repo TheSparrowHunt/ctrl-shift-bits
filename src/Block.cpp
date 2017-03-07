@@ -12,6 +12,11 @@ Block::Block(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont>
     //getting a shared pointer to the font
     font = _font;
     size = _size;
+    bits = _bits;
+}
+
+Block::~Block(){
+    
 }
 
 //should get rid of the extra 1s to the left of the amount of bits for the level in which these blocks exist

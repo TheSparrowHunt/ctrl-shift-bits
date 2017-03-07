@@ -12,3 +12,7 @@ GameObject::GameObject(float x, float y, unsigned long ID){
     position = {x, y};
     uniqueID = ID;
 }
+
+GameObject::~GameObject(){
+    
+}
