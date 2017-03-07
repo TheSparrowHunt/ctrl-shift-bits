@@ -7,3 +7,15 @@
 //
 
 #include "BlockNodeIn.hpp"
+
+BlockNodeIn::BlockNodeIn(float x, float y, unsigned long ID) : BlockNode(x, y, ID){
+    
+}
+
+BlockNodeIn::~BlockNodeIn(){
+    
+}
+
+void BlockNodeIn::childDraw(){
+    
+}

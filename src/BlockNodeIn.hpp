@@ -10,5 +10,13 @@
 #define BlockNodeIn_hpp
 
 #include <stdio.h>
+#include "ofMain.h"
+#include "BlockNode.hpp"
 
+class BlockNodeIn : public BlockNode{
+public:
+    BlockNodeIn(float x, float y, unsigned long ID);
+    ~BlockNodeIn();
+    void childDraw();
+};
 #endif /* BlockNodeIn_hpp */

@@ -14,7 +14,8 @@
 #include "ofMain.h"
 #include "GameObject.hpp"
 #include <math.h>
-
+#include "BlockNodeIn.hpp"
+#include "BlockNodeOut.hpp"
 
 class Block : public GameObject{
 public:
@@ -36,6 +37,12 @@ public:
     Block* firstIn;
     Block* secondIn;
     std::vector<Block*> outs;
+    
+    //blocks displaying the nodes for connection
+    BlockNodeIn* firstInNode;
+    BlockNodeIn* secondInNode;
+    
+    BlockNodeOut* outNode;
     
     //outvalue for the next Block
     unsigned int outValue;

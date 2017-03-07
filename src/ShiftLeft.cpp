@@ -13,10 +13,17 @@ ShiftLeft::ShiftLeft(float x, float y, unsigned long ID, std::shared_ptr<ofTrueT
     inNodes = 2;
     outNodes = 1;
     displayText = "<<";
+    //uniqueIDs for BlockNodes not important and difficult
+    //position x=leftside - leftsidedifference
+    firstInNode = new BlockNodeIn(x-(x - boundingBox.getLeft()), boundingBox.getTop()+(size/3), ID);
+    secondInNode = new BlockNodeIn(x-(x - boundingBox.getLeft()), boundingBox.getTop()+2*(size/3), ID);
+    //outNode
+    outNode = new BlockNodeOut(x+(x - boundingBox.getLeft()), boundingBox.getTop()+(size/2), ID);
 }
 
 ShiftLeft::~ShiftLeft(){
-    
+    //delete firstInNode;
+    //delete secondInNode;
 }
 
 

@@ -14,11 +14,17 @@ Block::Block(float x, float y, unsigned long ID, std::shared_ptr<ofTrueTypeFont>
     size = _size;
     bits = _bits;
     boundingBox = ofRectangle(x-size/2, y-size/2, size, size);
-    boundingBox.scaleFromCenter(1);
+    firstIn = NULL;
+    secondIn = NULL;
+    firstInNode = NULL;
+    secondInNode = NULL;
+    outNode = NULL;
 }
 
 Block::~Block(){
-    
+    delete firstInNode;
+    delete secondInNode;
+    delete outNode;
 }
 
 void Block::draw(){
@@ -27,8 +33,6 @@ void Block::draw(){
     
         //translate to position so we can draw based on local coords
         ofTranslate(position.x, position.y);
-        ofScale(0.5, 0.5);
-        //update the bounding box
     
         //drawing the rectangle around the centre of object
         ofPushStyle();
@@ -59,17 +63,49 @@ void Block::draw(){
     
         ofPopStyle();
     ofPopMatrix();
+    
+    if (firstInNode != NULL){
+        firstInNode->draw();
+        firstInNode->position = {position.x-(size/2), position.y - (1*(size/4))};
+        
+    }
+    if (secondInNode != NULL){
+        secondInNode->draw();
+        secondInNode->position = {position.x-(size/2), position.y + (1*(size/4))};
+        //secondInNode->position = {position.x-(position.x - boundingBox.getLeft()), boundingBox.getTop()+2*(size/3)};
+    }
+    if (outNode != NULL){
+        outNode->draw();
+        outNode->position = {position.x+(size/2), position.y};
+    }
 }
 
 void Block::resizeBounds(float resize){
-    boundingBox = ofRectangle((position.x-size/4)*resize, (position.y-size/4)*resize, (size/2)*resize, (size/2)*resize);
-    //boundingBox.scaleFromCenter(resize);
-    std::cout << resize << " " << boundingBox.getArea() << std::endl;
+    boundingBox = ofRectangle((position.x-size/2)*resize, (position.y-size/2)*resize, size*resize, size*resize);
+    if (firstInNode != NULL){
+        firstInNode->resizeBounds(resize);
+    }
+    if (secondInNode != NULL){
+        secondInNode->resizeBounds(resize);
+    }
+    if (outNode != NULL){
+        outNode->resizeBounds(resize);
+    }
 }
 
 void Block::intersectionCheck(float x, float y){
     ofPoint mouse = ofPoint(x, y);
     mouseIn = boundingBox.intersects(mouse,mouse);
+    
+    if (firstInNode != NULL){
+        firstInNode->intersectionCheck(x, y);
+    }
+    if (secondInNode != NULL){
+        secondInNode->intersectionCheck(x, y);
+    }
+    if (outNode != NULL){
+        outNode->intersectionCheck(x, y);
+    }
 
 }
 //should get rid of the extra 1s to the left of the amount of bits for the level in which these blocks exist

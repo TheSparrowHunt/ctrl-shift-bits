@@ -13,18 +13,21 @@
 #include "ofMain.h"
 #include "GameObject.hpp"
 
-class BlockNode : GameObject{
+class BlockNode : public GameObject{
 public:
     BlockNode(float x, float y, unsigned long ID);
-    
+public:
     float width = 10.0f;
     float height = 10.0f;
     virtual ~BlockNode();
     
+    std::vector<BlockNode*> connections;
+    void resizeBounds(float resize);
+    void intersectionCheck(float x, float y);
     void draw();
-    
-    void resizeBounds();
-    
+    bool mouseIn;
+protected:
+    virtual void childDraw()=0;
 };
 
 #endif /* BlockNode_hpp */

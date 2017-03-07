@@ -23,12 +23,12 @@ class GameObject{
     virtual ~GameObject();
     
     ofRectangle boundingBox;
+    //position vec2f
+    ofVec2f position;
+    
     protected:
     //variable to test for when an object has completed what it needs to do and can be removed
     bool finished = false;
-    
-    //position vec2f
-    ofVec2f position;
     
     //virtual function for draw, children of this object will have this.
     virtual void draw()=0;

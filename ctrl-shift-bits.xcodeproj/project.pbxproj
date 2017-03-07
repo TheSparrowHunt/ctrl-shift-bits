@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		231C93551E6E991700BBE890 /* BlockNodeOut.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 231C93531E6E991700BBE890 /* BlockNodeOut.cpp */; };
 		23ECD2241E6E191C00AF9DC6 /* GameObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23ECD2221E6E191C00AF9DC6 /* GameObject.cpp */; };
 		23ECD2281E6E1DE000AF9DC6 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23ECD2261E6E1DE000AF9DC6 /* Block.cpp */; };
 		23ECD22B1E6E26FA00AF9DC6 /* ShiftLeft.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 23ECD2291E6E26FA00AF9DC6 /* ShiftLeft.cpp */; };
@@ -47,6 +48,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		231C93531E6E991700BBE890 /* BlockNodeOut.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlockNodeOut.cpp; sourceTree = "<group>"; };
+		231C93541E6E991700BBE890 /* BlockNodeOut.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlockNodeOut.hpp; sourceTree = "<group>"; };
 		23ECD2221E6E191C00AF9DC6 /* GameObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameObject.cpp; sourceTree = "<group>"; };
 		23ECD2231E6E191C00AF9DC6 /* GameObject.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameObject.hpp; sourceTree = "<group>"; };
 		23ECD2261E6E1DE000AF9DC6 /* Block.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Block.cpp; sourceTree = "<group>"; };
@@ -108,6 +111,8 @@
 				23ECD22D1E6E503D00AF9DC6 /* BlockNode.hpp */,
 				23ECD2321E6E51B700AF9DC6 /* BlockNodeIn.cpp */,
 				23ECD2331E6E51B700AF9DC6 /* BlockNodeIn.hpp */,
+				231C93531E6E991700BBE890 /* BlockNodeOut.cpp */,
+				231C93541E6E991700BBE890 /* BlockNodeOut.hpp */,
 			);
 			name = BlockNodes;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 			files = (
 				23ECD2341E6E51B700AF9DC6 /* BlockNodeIn.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
+				231C93551E6E991700BBE890 /* BlockNodeOut.cpp in Sources */,
 				23ECD2281E6E1DE000AF9DC6 /* Block.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				23ECD22E1E6E503D00AF9DC6 /* BlockNode.cpp in Sources */,
