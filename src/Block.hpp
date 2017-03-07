@@ -45,10 +45,12 @@ public:
     
     //bits for this level
     unsigned int bits;
+    
+    void draw();
     protected:
     //virtual function for draw, children of this object will have this.
     //ready to inherit on the next level
-    virtual void draw()=0;
+    
     
     virtual void behaviour()=0;
 };

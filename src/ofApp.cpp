@@ -5,7 +5,7 @@ void ofApp::setup(){
     uniqueIDCounter = 0UL;
     font = std::shared_ptr<ofTrueTypeFont>(new ofTrueTypeFont());
     font->load("SCProLight.ttf", 72, true, true, true);
-    test = new ShiftLeft(ofGetWidth()/2, ofGetHeight()/2, 100, font, 100, 4);
+    test = new ShiftLeft(ofGetWidth()/2, ofGetHeight()/2, 100, font, 120, 4);
 }
 
 //--------------------------------------------------------------

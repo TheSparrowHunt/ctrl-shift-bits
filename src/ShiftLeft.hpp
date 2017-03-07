@@ -22,7 +22,7 @@ public:
     ~ShiftLeft();
     
     //non-virtual
-    void draw();
+    //void draw();
     void behaviour();
     
     
