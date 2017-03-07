@@ -108,6 +108,11 @@ void Block::intersectionCheck(float x, float y){
     }
 
 }
+
+bool Block::intersectionCheckOut(float x, float y){
+    ofPoint mouse = ofPoint(x, y);
+    return boundingBox.intersects(mouse,mouse);
+}
 //should get rid of the extra 1s to the left of the amount of bits for the level in which these blocks exist
 unsigned int Block::clearValues(unsigned int value){
     return value%((unsigned int)std::powf(2.0f, (float)bits));

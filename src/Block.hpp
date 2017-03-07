@@ -60,6 +60,7 @@ public:
     //to resize the bounding boxes after scaling the screen
     void resizeBounds(float resize);
     void intersectionCheck(float x, float y);
+    bool intersectionCheckOut(float x, float y);
     
     protected:
     //virtual function for draw, children of this object will have this.

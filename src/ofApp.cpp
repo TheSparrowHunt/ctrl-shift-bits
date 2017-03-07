@@ -7,6 +7,7 @@ void ofApp::setup(){
     font->load("SCPro-Regular.ttf", 72, true, true, true);
     test = new ShiftLeft(0, 0, 100, font, 120, 4);
     scaleFactor = 1.0f;
+    mouseHeld = NULL;
     //ofEnableSmoothing();
     for(int i = -1; i < 2; i++){
         for(int j = -1; j < 2; j++){
@@ -36,10 +37,13 @@ void ofApp::draw(){
         (*it)->position.x = (*it)->position.x + ofRandom(-1.0f, 1.0f);
         (*it)->position.y = (*it)->position.y + ofRandom(-1.0f, 1.0f);
     }
-    
+    if (ofGetMousePressed() && mouseHeld != NULL){
+        mouseHeld->position.x = ((float)ofGetMouseX()-ofGetWidth()/2)*1/scaleFactor;
+        mouseHeld->position.y = ((float)ofGetMouseY()-ofGetHeight()/2)*1/scaleFactor;
+    }
     //test->draw();
     ofPopMatrix();
-    std::cout << ofGetFrameRate() << std::endl;
+    std::cout << ((float)ofGetMouseX()-ofGetWidth()/2)*-scaleFactor << std::endl;
 }
 
 //--------------------------------------------------------------
@@ -66,7 +70,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    for(auto it = blocks.begin(); it != blocks.end(); ++it) {
+        if((*it)->intersectionCheckOut((float) x-ofGetWidth()/2, (float) y-ofGetHeight()/2)){
+            mouseHeld = (*it);
+            break;
+        }
+    }
 }
 
 //--------------------------------------------------------------
