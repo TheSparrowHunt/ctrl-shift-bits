@@ -13,7 +13,7 @@ BlockNode::BlockNode(float x, float y, unsigned long ID) : GameObject(x, y, ID){
     //intentionally twice as large as its width and height
     boundingBox = *new ofRectangle(x-width, y-height, width, height);
     activeConnection = false;
-    activeConnect = {0.0, 0.0, 0.0};
+    activeConnect = {x, y};
 }
 
 void BlockNode::draw(){

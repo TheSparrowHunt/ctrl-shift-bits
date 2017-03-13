@@ -47,8 +47,8 @@ void ofApp::draw(){
     for(auto it = blocks.begin(); it != blocks.end(); ++it) {
         (*it)->draw();
         (*it)->resizeBounds(scaleFactor);
-        (*it)->position.x = (*it)->position.x + ofRandom(-1.0f, 1.0f);
-        (*it)->position.y = (*it)->position.y + ofRandom(-1.0f, 1.0f);
+        //(*it)->position.x = (*it)->position.x + ofRandom(-1.0f, 1.0f);
+        //(*it)->position.y = (*it)->position.y + ofRandom(-1.0f, 1.0f);
     }
     //mouse selection updates
     if(ofGetMousePressed() && mouseHeld != NULL){
@@ -127,8 +127,11 @@ void ofApp::mouseReleased(int x, int y, int button){
     if (dynamic_cast<BlockNode*>(mouseHeld) != NULL){
         BlockNode* heldBlockNode = dynamic_cast<BlockNode*>(mouseHeld);
         for(auto it = blocks.begin(); it != blocks.end(); ++it) {
+            float x = ((float)ofGetMouseX()-ofGetWidth()/2)*1/scaleFactor;
+            float y = ((float)ofGetMouseY()-ofGetHeight()/2)*1/scaleFactor;
             //if the mouse location is close to the position of the any ins
-            if ((*it)->firstInNode->position.distance({(float) x-ofGetWidth()/2, (float) y-ofGetHeight()/2}) < 10.0f){
+            if ((*it)->firstInNode->position.distance({x, y}) < 10.0f){
+            //if ((*it)->firstInNode->position.distance({(float) x-ofGetWidth()/2, (float) y-ofGetHeight()/2}) < 10.0f){
                 //push_back the connection
                 heldBlockNode->connections.push_back((*it)->firstInNode);
                 //set activeConnection to false as it is no longer active.
