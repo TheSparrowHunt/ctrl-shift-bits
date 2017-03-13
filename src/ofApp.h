@@ -26,5 +26,5 @@ class ofApp : public ofBaseApp{
     std::shared_ptr<ofTrueTypeFont> font;
     float scaleFactor;
     std::vector<Block*> blocks;
-    Block* mouseHeld;
+    GameObject* mouseHeld;
 };

@@ -18,6 +18,8 @@ public:
     BlockNodeOut(float x, float y, unsigned long ID);
     ~BlockNodeOut();
     void childDraw();
+private:
+    void drawLine(ofPoint end);
 };
 
 #endif /* BlockNodeOut_hpp */

@@ -12,6 +12,8 @@
 BlockNode::BlockNode(float x, float y, unsigned long ID) : GameObject(x, y, ID){
     //intentionally twice as large as its width and height
     boundingBox = *new ofRectangle(x-width, y-height, width, height);
+    activeConnection = false;
+    activeConnect = {0.0, 0.0, 0.0};
 }
 
 void BlockNode::draw(){
@@ -51,3 +53,10 @@ void BlockNode::intersectionCheck(float x, float y){
     ofPoint mouse = ofPoint(x, y);
     mouseIn = boundingBox.intersects(mouse,mouse);
 }
+
+bool BlockNode::intersectionCheckOut(float x, float y){
+    ofPoint mouse = ofPoint(x, y);
+    return boundingBox.intersects(mouse,mouse);
+}
+
+
