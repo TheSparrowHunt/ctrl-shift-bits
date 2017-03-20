@@ -34,7 +34,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofPushStyle();
-    ofSetColor(0, 0, 0, 32);
+    ofSetColor(0, 0, 0, 64);
     ofDrawRectangle(0,0,ofGetWidth(), ofGetHeight());
     ofPopStyle();
     //drawing for the Blocks layer, it scales completely
@@ -43,13 +43,7 @@ void ofApp::draw(){
     ofTranslate(ofGetWidth()/2, ofGetHeight()/2);
     ofScale(scaleFactor, scaleFactor);
     //ofBackground(0, 0, 0, 10);
-    //iteration to do things with the blocks
-    for(auto it = blocks.begin(); it != blocks.end(); ++it) {
-        (*it)->draw();
-        (*it)->resizeBounds(scaleFactor);
-        //(*it)->position.x = (*it)->position.x + ofRandom(-1.0f, 1.0f);
-        //(*it)->position.y = (*it)->position.y + ofRandom(-1.0f, 1.0f);
-    }
+    
     //mouse selection updates
     if(ofGetMousePressed() && mouseHeld != NULL){
         
@@ -67,6 +61,15 @@ void ofApp::draw(){
             
         }
     }
+    
+    //iteration to do things with the blocks
+    for(auto it = blocks.begin(); it != blocks.end(); ++it) {
+        (*it)->draw();
+        (*it)->resizeBounds(scaleFactor);
+        //(*it)->position.x = (*it)->position.x + ofRandom(-1.0f, 1.0f);
+        //(*it)->position.y = (*it)->position.y + ofRandom(-1.0f, 1.0f);
+    }
+    
     //test->draw();
     ofPopMatrix();
     //DEBUG
@@ -85,6 +88,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
+    
     //for highlighting what would be selected if the user clicks now
     for(auto it = blocks.begin(); it != blocks.end(); ++it) {
         (*it)->intersectionCheck(((float)ofGetMouseX())-(ofGetWidth()/2), ((float)ofGetMouseY())-(ofGetHeight()/2));
@@ -124,19 +128,41 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
+    
+    //if the mouseHeld is a BlockNode (connection)
     if (dynamic_cast<BlockNode*>(mouseHeld) != NULL){
+        
         BlockNode* heldBlockNode = dynamic_cast<BlockNode*>(mouseHeld);
+        
+        //horribly inefficient iteration for connection creation detection.
         for(auto it = blocks.begin(); it != blocks.end(); ++it) {
+            
+            //with scaling from screen space to "real" space
             float x = ((float)ofGetMouseX()-ofGetWidth()/2)*1/scaleFactor;
             float y = ((float)ofGetMouseY()-ofGetHeight()/2)*1/scaleFactor;
+            
             //if the mouse location is close to the position of the any ins
             if ((*it)->firstInNode->position.distance({x, y}) < 10.0f){
-            //if ((*it)->firstInNode->position.distance({(float) x-ofGetWidth()/2, (float) y-ofGetHeight()/2}) < 10.0f){
+            
                 //push_back the connection
                 heldBlockNode->connections.push_back((*it)->firstInNode);
+                
                 //set activeConnection to false as it is no longer active.
                 heldBlockNode->activeConnection = false;
                 break;
+            }
+            else if ((*it)->secondInNode->position.distance({x, y}) < 10.0f){
+                //push_back the connection
+                heldBlockNode->connections.push_back((*it)->secondInNode);
+                
+                //set activeConnection to false as it is no longer active.
+                heldBlockNode->activeConnection = false;
+                break;
+                
+            }
+            else{
+                heldBlockNode->activeConnection = false;
+                
             }
             
             heldBlockNode->activeConnect.x = ((float)ofGetMouseX()-ofGetWidth()/2)*1/scaleFactor;
